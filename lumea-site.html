@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luméa — Insumos e óleos essenciais para quem formula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EDE6D6;
+    --paper-2:#E4DBC6;
+    --ink:#211D16;
+    --forest:#233329;
+    --forest-2:#1A2620;
+    --amber:#BD7E2E;
+    --amber-2:#8F5F22;
+    --sage:#7C8B72;
+    --line:#C9BFA8;
+    --line-dark: rgba(237,230,214,0.22);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'IBM Plex Mono',monospace;
+    letter-spacing:0.02em;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    opacity:0.72;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* HEADER */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(237,230,214,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px 0;
+  }
+  .wordmark{
+    font-family:'Fraunces',serif; font-weight:600; font-size:22px; letter-spacing:0.01em;
+    display:flex; align-items:baseline; gap:8px;
+  }
+  .wordmark .dot{ color:var(--amber); }
+  nav ul{
+    list-style:none; display:flex; gap:32px; margin:0; padding:0;
+    font-size:14px; font-weight:500;
+  }
+  nav a{ text-decoration:none; opacity:0.78; transition:opacity .2s; }
+  nav a:hover{ opacity:1; }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:13px;
+    padding:11px 20px; border-radius:2px;
+    text-decoration:none; cursor:pointer; border:1px solid transparent;
+  }
+  .btn-amber{ background:var(--amber); color:var(--paper); }
+  .btn-amber:hover{ background:var(--amber-2); }
+  .btn-outline{ border-color:var(--ink); color:var(--ink); background:transparent; }
+  .btn-outline:hover{ background:var(--ink); color:var(--paper); }
+  .menu-btn{ display:none; }
+
+  /* HERO */
+  .hero{
+    background:var(--forest);
+    color:var(--paper);
+    position:relative;
+    overflow:hidden;
+    border-bottom: 6px solid var(--amber);
+  }
+  .hero .wrap{
+    padding:96px 28px 84px;
+    position:relative; z-index:2;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.15fr 0.85fr; gap:56px; align-items:end;
+  }
+  .hero h1{
+    font-size:clamp(38px,5.2vw,64px);
+    line-height:1.04;
+    color:var(--paper);
+    margin-top:18px;
+  }
+  .hero h1 em{ font-style:italic; color:var(--amber); font-weight:400; }
+  .hero p.lede{
+    max-width:46ch; margin-top:22px; font-size:17px; line-height:1.6; opacity:0.88;
+  }
+  .hero-cta{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .hero-cta .btn-outline{ border-color: rgba(237,230,214,0.5); color:var(--paper); }
+  .hero-cta .btn-outline:hover{ background:var(--paper); color:var(--forest); }
+
+  .label-card{
+    background:var(--paper);
+    color:var(--ink);
+    border:1px solid var(--line);
+    padding:22px 22px 20px;
+    position:relative;
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.18);
+  }
+  .label-card::before{
+    content:"";
+    position:absolute; inset:6px;
+    border:1px dashed var(--line);
+    pointer-events:none;
+  }
+  .label-card .tag-eyebrow{ font-size:11px; }
+  .label-card h3{ font-size:21px; margin-top:6px; }
+  .label-card .inci{ font-size:12px; opacity:0.6; margin-top:4px; }
+  .label-row{ display:flex; justify-content:space-between; margin-top:16px; font-size:12px; }
+  .label-row div{ }
+  .label-row .k{ opacity:0.55; display:block; margin-bottom:2px; }
+  .swatch{
+    width:34px; height:34px; border-radius:50%;
+    background: radial-gradient(circle at 35% 30%, #E3A85B, var(--amber-2));
+    border:1px solid rgba(0,0,0,0.15);
+    position:absolute; top:20px; right:20px;
+  }
+
+  /* SPECIMEN STRIP */
+  section{ padding:88px 0; }
+  .section-head{ max-width:640px; margin-bottom:48px; }
+  .section-head h2{ font-size:clamp(28px,3.6vw,40px); margin-top:14px; line-height:1.12; }
+  .section-head p{ margin-top:16px; font-size:16px; line-height:1.6; opacity:0.75; max-width:56ch; }
+
+  .specimen-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  .specimen{
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    padding:20px 18px;
+    position:relative;
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .specimen:hover{ transform:translateY(-4px); box-shadow:0 10px 24px rgba(35,51,41,0.14); }
+  .specimen .num{ font-size:11px; opacity:0.5; }
+  .specimen h4{ font-family:'Fraunces',serif; font-weight:500; font-size:19px; margin-top:8px; }
+  .specimen .inci{ font-size:11px; opacity:0.6; margin-top:3px; }
+  .specimen dl{ margin:16px 0 0; padding-top:14px; border-top:1px dashed var(--line); font-size:12px; }
+  .specimen dt{ opacity:0.55; }
+  .specimen dd{ margin:0 0 8px; }
+  .specimen .dot-amber{
+    position:absolute; top:18px; right:16px;
+    width:9px; height:9px; border-radius:50%; background:var(--amber);
+  }
+
+  /* AUDIENCE */
+  .audience{ background:var(--forest-2); color:var(--paper); }
+  .audience .section-head p{ opacity:0.72; }
+  .audience-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line-dark);
+    border:1px solid var(--line-dark);
+  }
+  .audience-card{
+    background:var(--forest-2); padding:32px 24px;
+  }
+  .audience-card .n{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--amber); }
+  .audience-card h3{ color:var(--paper); font-size:20px; margin-top:14px; line-height:1.2; }
+  .audience-card p{ font-size:14px; margin-top:12px; opacity:0.72; line-height:1.55; }
+
+  /* SOURCING / TIMELINE */
+  .sourcing-grid{
+    display:grid; grid-template-columns: 1fr 1fr; gap:0;
+    border:1px solid var(--line);
+  }
+  .sourcing-col{ padding:36px 34px; }
+  .sourcing-col + .sourcing-col{ border-left:1px solid var(--line); }
+  .sourcing-col .eyebrow{ color:var(--amber-2); }
+  .sourcing-col h3{ font-size:24px; margin-top:10px; }
+  .sourcing-col p{ margin-top:14px; font-size:15px; line-height:1.65; opacity:0.8; }
+  .sourcing-col ul{ margin:18px 0 0; padding-left:0; list-style:none; }
+  .sourcing-col li{ font-size:14px; padding:8px 0; border-top:1px solid var(--line); display:flex; gap:10px;}
+  .sourcing-col li:first-child{ border-top:none; }
+  .sourcing-col li::before{ content:"—"; color:var(--amber); flex:none; }
+  .note-box{
+    margin-top:26px; padding:16px 18px; background:var(--paper-2);
+    border-left:3px solid var(--amber); font-size:13px; line-height:1.6;
+  }
+
+  /* CONTACT */
+  .contact{ background:var(--forest); color:var(--paper); border-top:6px solid var(--amber); }
+  .contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:start; }
+  .contact h2{ color:var(--paper); font-size:clamp(28px,3.6vw,40px); }
+  .contact p.lede{ margin-top:18px; opacity:0.78; font-size:16px; line-height:1.6; max-width:44ch; }
+  form{ display:grid; gap:14px; }
+  .field{ display:grid; gap:6px; }
+  label{ font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; opacity:0.7; }
+  input, select, textarea{
+    background:rgba(237,230,214,0.06);
+    border:1px solid rgba(237,230,214,0.28);
+    color:var(--paper);
+    padding:12px 14px;
+    font-family:'Inter',sans-serif; font-size:14px;
+    border-radius:2px;
+  }
+  input:focus, select:focus, textarea:focus{
+    outline:2px solid var(--amber); outline-offset:1px; border-color:var(--amber);
+  }
+  ::placeholder{ color:rgba(237,230,214,0.4); }
+  textarea{ resize:vertical; min-height:88px; }
+  .submit-row{ display:flex; align-items:center; gap:16px; margin-top:4px; }
+  .form-note{ font-size:12px; opacity:0.55; }
+
+  footer{
+    background:var(--forest-2); color:var(--paper);
+    padding:40px 0;
+    font-size:13px;
+  }
+  .footer-row{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .footer-row .wordmark{ font-size:17px; color:var(--paper); }
+  .footer-links{ display:flex; gap:22px; opacity:0.7; }
+  .footer-links a{ text-decoration:none; }
+
+  @media (max-width: 880px){
+    nav, .menu-btn-space{ display:none; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .specimen-grid{ grid-template-columns:repeat(2,1fr); }
+    .audience-grid{ grid-template-columns:repeat(2,1fr); }
+    .sourcing-grid{ grid-template-columns:1fr; }
+    .sourcing-col + .sourcing-col{ border-left:none; border-top:1px solid var(--line); }
+    .contact-grid{ grid-template-columns:1fr; gap:40px; }
+  }
+  @media (max-width:560px){
+    .specimen-grid{ grid-template-columns:1fr; }
+    .audience-grid{ grid-template-columns:1fr; }
+    .hero .wrap{ padding:64px 20px 56px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .specimen{ transition:none; }
+  }
+
+  .reveal{ opacity:1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav-row">
+    <div class="wordmark">LUMÉA<span class="dot">·</span></div>
+    <nav>
+      <ul>
+        <li><a href="#catalogo">Catálogo</a></li>
+        <li><a href="#para-quem">Para quem fornecemos</a></li>
+        <li><a href="#sourcing">Como fornecemos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+    <a href="#contato" class="btn btn-outline">Solicitar catálogo</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow">Matéria-prima · Fornecimento B2B</div>
+        <h1>Insumos e óleos essenciais<br>para quem <em>formula</em>.</h1>
+        <p class="lede">Fornecimento de matérias-primas, óleos essenciais e vegetais para ateliês de cosmética artesanal, farmácias de manipulação, esteticistas e aromaterapeutas em todo o Brasil.</p>
+        <div class="hero-cta">
+          <a href="#contato" class="btn btn-amber">Solicitar catálogo →</a>
+          <a href="#para-quem" class="btn btn-outline">Ver para quem fornecemos</a>
+        </div>
+      </div>
+      <div class="label-card reveal">
+        <div class="swatch" aria-hidden="true"></div>
+        <div class="tag-eyebrow mono">ESPÉCIME · 014</div>
+        <h3>Óleo Essencial de Lavanda</h3>
+        <div class="inci mono">Lavandula angustifolia Oil</div>
+        <div class="label-row">
+          <div><span class="k mono">ORIGEM</span>Bulgária</div>
+          <div><span class="k mono">EXTRAÇÃO</span>Dest. a vapor</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="catalogo">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--amber-2)">Catálogo</div>
+      <h2>Cada insumo, catalogado como um espécime.</h2>
+      <p>Rastreabilidade de origem e método de extração — a informação que quem formula precisa antes de colocar na fórmula.</p>
+    </div>
+
+    <div class="specimen-grid">
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">001</div>
+        <h4>Óleo Essencial de Laranja Doce</h4>
+        <div class="inci mono">Citrus Sinensis Peel Oil</div>
+        <dl>
+          <dt>Origem</dt><dd>Brasil</dd>
+          <dt>Categoria</dt><dd>Óleo essencial</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">002</div>
+        <h4>Óleo Essencial de Capim-Limão</h4>
+        <div class="inci mono">Cymbopogon Citratus Oil</div>
+        <dl>
+          <dt>Origem</dt><dd>Brasil</dd>
+          <dt>Categoria</dt><dd>Óleo essencial</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">003</div>
+        <h4>Óleo Essencial de Lavanda</h4>
+        <div class="inci mono">Lavandula Angustifolia Oil</div>
+        <dl>
+          <dt>Origem</dt><dd>França / Bulgária</dd>
+          <dt>Categoria</dt><dd>Óleo essencial</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">004</div>
+        <h4>Óleo Essencial de Rosa Damascena</h4>
+        <div class="inci mono">Rosa Damascena Flower Oil</div>
+        <dl>
+          <dt>Origem</dt><dd>Bulgária / Turquia</dd>
+          <dt>Categoria</dt><dd>Óleo essencial</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">005</div>
+        <h4>Óleo de Rosa Mosqueta</h4>
+        <div class="inci mono">Rosa Rubiginosa Seed Oil</div>
+        <dl>
+          <dt>Origem</dt><dd>Chile</dd>
+          <dt>Categoria</dt><dd>Óleo vegetal / carreador</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">006</div>
+        <h4>Manteiga de Karité</h4>
+        <div class="inci mono">Butyrospermum Parkii Butter</div>
+        <dl>
+          <dt>Origem</dt><dd>África Ocidental</dd>
+          <dt>Categoria</dt><dd>Manteiga vegetal</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">007</div>
+        <h4>Ácido Hialurônico</h4>
+        <div class="inci mono">Sodium Hyaluronate</div>
+        <dl>
+          <dt>Origem</dt><dd>China / Coreia do Sul</dd>
+          <dt>Categoria</dt><dd>Extrato / ativo</dd>
+        </dl>
+      </div>
+      <div class="specimen reveal">
+        <span class="dot-amber" aria-hidden="true"></span>
+        <div class="num mono">008</div>
+        <h4>Niacinamida</h4>
+        <div class="inci mono">Niacinamide</div>
+        <dl>
+          <dt>Origem</dt><dd>China</dd>
+          <dt>Categoria</dt><dd>Extrato / ativo</dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="para-quem" class="audience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--amber)">Para quem fornecemos</div>
+      <h2>Feito para quem transforma matéria-prima em produto.</h2>
+      <p>A Luméa não vende para o consumidor final — atendemos quem está do outro lado do rótulo.</p>
+    </div>
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="n mono">A</div>
+        <h3>Ateliês e marcas indie</h3>
+        <p>Cosmética artesanal e formulação própria, em pequenos e médios volumes.</p>
+      </div>
+      <div class="audience-card">
+        <div class="n mono">B</div>
+        <h3>Farmácias de manipulação</h3>
+        <p>Matéria-prima com rastreabilidade e documentação para fórmulas magistrais.</p>
+      </div>
+      <div class="audience-card">
+        <div class="n mono">C</div>
+        <h3>Esteticistas e spas</h3>
+        <p>Óleos essenciais e vegetais para uso profissional em protocolos de estética.</p>
+      </div>
+      <div class="audience-card">
+        <div class="n mono">D</div>
+        <h3>Aromaterapeutas</h3>
+        <p>Óleos essenciais puros, com origem e método de extração documentados.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="sourcing">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow" style="color:var(--amber-2)">Como fornecemos</div>
+      <h2>Fornecimento nacional hoje, importação direta a caminho.</h2>
+      <p>Construindo a operação em duas fases, para crescer com base sólida.</p>
+    </div>
+    <div class="sourcing-grid">
+      <div class="sourcing-col">
+        <div class="eyebrow">Fase 01 — Agora</div>
+        <h3>Fornecedores nacionais</h3>
+        <p>Compra de distribuidores brasileiros já estabelecidos, com nota fiscal regularizada — validando demanda com menor capital investido.</p>
+        <ul>
+          <li>Estoque próprio para itens de giro previsível</li>
+          <li>Parceiros em consignação para itens de nicho</li>
+          <li>Entrega em todo o Brasil</li>
+        </ul>
+      </div>
+      <div class="sourcing-col">
+        <div class="eyebrow">Fase 02 — Em construção</div>
+        <h3>Importação direta</h3>
+        <p>Relacionamento direto com produtores internacionais de óleos essenciais e insumos, ampliando catálogo e margem.</p>
+        <div class="note-box">
+          Matéria-prima cosmética tem exigência regulatória mais leve que produto acabado — a maioria dos insumos é dispensada de Autorização de Funcionamento (AFE) junto à Anvisa, o que simplifica o caminho da importação.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contato" class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <div class="eyebrow">Contato</div>
+        <h2>Solicite o catálogo Luméa.</h2>
+        <p class="lede">Conte um pouco sobre o que você formula. Retornamos com o catálogo e condições de fornecimento adequadas ao seu volume.</p>
+        <p class="lede mono" style="font-size:14px; margin-top:14px; opacity:0.7;"><a href="mailto:contato@lumeacosmeticos.com" style="color:inherit;">contato@lumeacosmeticos.com</a></p>
+      </div>
+      <form action="https://formsubmit.co/contato@lumeacosmeticos.com" method="POST">
+        <input type="hidden" name="_subject" value="Nova solicitação de catálogo — site Luméa">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="field">
+          <label for="nome">Nome</label>
+          <input id="nome" name="Nome" type="text" placeholder="Seu nome" required>
+        </div>
+        <div class="field">
+          <label for="empresa">Empresa / ateliê</label>
+          <input id="empresa" name="Empresa" type="text" placeholder="Nome do negócio (se houver)">
+        </div>
+        <div class="field">
+          <label for="area">Área de atuação</label>
+          <select id="area" name="Área de atuação">
+            <option>Ateliê / marca indie</option>
+            <option>Farmácia de manipulação</option>
+            <option>Estética / spa</option>
+            <option>Aromaterapia</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="msg">O que você formula?</label>
+          <textarea id="msg" name="Mensagem" placeholder="Conte um pouco sobre seus produtos e volume aproximado"></textarea>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn btn-amber">Enviar solicitação →</button>
+          <span class="form-note">Respondemos em até 2 dias úteis.</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-row">
+    <div class="wordmark">LUMÉA</div>
+    <div class="footer-links">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#para-quem">Para quem</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="mono" style="opacity:0.55">Luméa Comércio de Insumos Cosméticos LTDA</div>
+  </div>
+</footer>
+
+
+</body>
+</html>
